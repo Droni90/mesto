@@ -7,4 +7,4 @@
 4. Адаптивная верстка.
 5. Организация файлов по БЭМ.<br>
 6. Java Script
-Ссылка на сайт : https://droni90.github.io/mesto/index.html
+Ссылка на сайт : https://droni90.github.io/mesto
