@@ -1,0 +1,10 @@
+.cards__link{
+  display: flex;
+  align-items: center;
+  transition: .5s;
+}
+
+.cards__link:hover{
+  opacity: .5;
+}
+

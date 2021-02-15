@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pages/index.css">
+  <title>Mesto</title>
+</head>
+
+<body class="roof">
+  <div class="page">
+    <header class="header">
+      <a href="#" class="header__link"><img src="images/logo.svg" alt="лого" class="logo"></a>
+      <h1 class="header__h1">Место</h1>
+    </header>
+
+    <main>
+      <section class="profile container">
+        <img src="images/avatar.jpg" alt="Аватар" class="profile__avatar">
+        <div class="profile__info">
+          <div class="profile__flex-row">
+            <p class="profile__name">
+              Жак-Ив Кусто
+            </p>
+            <a href="#" class="profile__edit-button"><img src="images/EditButton.svg" alt="редкатировать"
+                class="profile__edit-button-icon"></a>
+          </div>
+          <p class="profile__status">
+            Исследователь океана
+          </p>
+        </div>
+        <a href="#" class="profile__add-button">
+          <img src="images/plus.svg" alt="добавить" class="profile__add-button-icon">
+        </a>
+
+      </section>
+      <section class="cards container">
+        <article class="cards__item">
+          <img src="images/img1.jpg" alt="#" class="cards__img">
+          <div class="cards__info">
+            <p class="cards__text">Карачаевск</p>
+            <a href="#" class="cards__link">
+              <img src="images/like.svg" alt="#" class="cards__like">
+            </a>
+          </div>
+        </article>
+        <article class="cards__item">
+          <img src="images/img2.jpg" alt="#" class="cards__img">
+          <div class="cards__info">
+            <p class="cards__text">Гора Эльбрус</p>
+            <a href="#" class="cards__link">
+              <img src="images/like.svg" alt="#" class="cards__like">
+            </a>
+          </div>
+        </article>
+        <article class="cards__item">
+          <img src="images/img3.jpg" alt="#" class="cards__img">
+          <div class="cards__info">
+            <p class="cards__text">Домбай</p>
+            <a href="#" class="cards__link">
+              <img src="images/like.svg" alt="#" class="cards__like">
+            </a>
+          </div>
+        </article>
+        <article class="cards__item">
+          <img src="images/img4.jpg" alt="#" class="cards__img">
+          <div class="cards__info">
+            <p class="cards__text">Гора Эльбрус</p>
+            <a href="#" class="cards__link">
+              <img src="images/like.svg" alt="#" class="cards__like">
+            </a>
+          </div>
+        </article>
+        <article class="cards__item">
+          <img src="images/img5.jpg" alt="#" class="cards__img">
+          <div class="cards__info">
+            <p class="cards__text">Домбай</p>
+            <a href="#" class="cards__link">
+              <img src="images/like.svg" alt="#" class="cards__like">
+            </a>
+          </div>
+        </article>
+        <article class="cards__item">
+          <img src="images/img6.jpg" alt="#" class="cards__img">
+          <div class="cards__info">
+            <p class="cards__text">Карачаево-Черкесия</p>
+            <a href="#" class="cards__link">
+              <img src="images/like.svg" alt="#" class="cards__like">
+            </a>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer container">
+      <p class="footer__copywriter">&copy; 2020 Mesto Russia</p>
+    </footer>
+  </div>
+
+  <div id="popup" class="popup">
+    <div class="popup__container">
+      <a href="#" class="popup__close"><img class="popup__close-icon" src="images/Close.svg" alt="закрыть"></a>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <input type="text" class="popup__name" value="Жак-Ив Кусто">
+      <input type="text" class="popup__about" value="Исследователь океана">
+      <input type="submit" class="popup__submit" value="Сохранить">
+    </div>
+  </div>
+  <script src="Apps/popup.js"></script>
+</body>
+</html>
