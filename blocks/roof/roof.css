@@ -1,4 +1,5 @@
 .roof{
+  min-width: 320px;
   background-color: #000;
   color: #fff;
   font-family: 'Inter', Arial, sans-serif;

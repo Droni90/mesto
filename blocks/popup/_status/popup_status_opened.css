@@ -1,3 +1,7 @@
 .popup_status_opened{
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+/* О , что то до этого я не додумался, круто ) */

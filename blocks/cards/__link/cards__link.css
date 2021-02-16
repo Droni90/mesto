@@ -2,6 +2,15 @@
   display: flex;
   align-items: center;
   transition: .5s;
+  border: none;
+  font: inherit;
+  color: inherit;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.cards__link:focus{
+  outline: none;
 }
 
 .cards__link:hover{
