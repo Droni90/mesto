@@ -1,21 +1,21 @@
-let openPopup = document.querySelector('#popup-edit');
-let editProfile = document.querySelector('.profile__edit-button');
-let closePopup = document.querySelector('#close-edit');
-let editName = document.querySelector('#popup__name');
-let editAbout = document.querySelector('#popup__about');
-let profileName = document.querySelector('.profile__name');
-let profileAbout = document.querySelector('.profile__status');
-let saveEditProfile = document.querySelector('#form-edit');
+const openPopup = document.querySelector('#popup-edit');
+const editProfile = document.querySelector('.profile__edit-button');
+const closePopup = document.querySelector('#close-edit');
+const editName = document.querySelector('#popup__name');
+const editAbout = document.querySelector('#popup__about');
+const profileName = document.querySelector('.profile__name');
+const profileAbout = document.querySelector('.profile__status');
+const saveEditProfile = document.querySelector('#form-edit');
 
 // Попап добавления картинок
 const cardsItem = document.querySelector('.cards');
 const cardsTemplate = document.querySelector('#cards-template').content;
 const openPopupAdd = document.querySelector('#popup-add');
-const AddPicture = document.querySelector('.profile__add-button');
+const addPicture = document.querySelector('.profile__add-button');
 const closePopupAdd = document.querySelector('#close-add');
 const pictureName = document.querySelector('#name-add');
 const pictureLink = document.querySelector('#link-add');
-const pictureSave = document.querySelector('#form-add');
+const savePicture = document.querySelector('#form-add');
 
 // попап открытия фото
 const openPhoto = document.querySelector('#popup-photo')
@@ -75,7 +75,7 @@ const initialCards = [
 ];
 
 // Открыть / закрыть попап
-AddPicture.addEventListener('click', function (){
+addPicture.addEventListener('click', function (){
   openPopupAdd.classList.add('popup_status_opened');
 });
 
@@ -143,5 +143,5 @@ function submitAddPicture(evt){
   openPopupAdd.classList.remove('popup_status_opened');
 }
 
-pictureSave.addEventListener('submit', submitAddPicture);
+savePicture.addEventListener('submit', submitAddPicture);
 
