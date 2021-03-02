@@ -7,6 +7,9 @@
   color: inherit;
   background-color: transparent;
   cursor: pointer;
+  min-width: 22px;
+  height: 19px;
+  background-image: url(../../../images/like.svg);
 }
 
 .cards__link:focus{
