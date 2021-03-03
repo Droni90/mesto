@@ -1,4 +1,4 @@
-const openPopup = document.querySelector('#popup-edit');
+const openPopup = document.querySelector('.popup_type_edit');
 const popup = document.querySelectorAll('.popup')
 const editProfile = document.querySelector('.profile__edit-button');
 const closePopup = document.querySelector('#close-edit');
@@ -11,7 +11,7 @@ const saveEditProfile = document.querySelector('#form-edit');
 // Попап добавления картинок
 const cardsItem = document.querySelector('.cards');
 const cardsTemplate = document.querySelector('#cards-template').content;
-const openPopupAdd = document.querySelector('#popup-add');
+const openPopupAdd = document.querySelector('.popup_type_add');
 const buttonAddPicture = document.querySelector('.profile__add-button');
 const closePopupAdd = document.querySelector('#close-add');
 const pictureName = document.querySelector('#name-add');
@@ -20,7 +20,7 @@ const savePicture = document.querySelector('#form-add');
 const like = document.querySelector('.cards__link');
 const cardItem = document.querySelector('.cards__item')
 // попап открытия фото
-const openPhoto = document.querySelector('#popup-photo')
+const openPhoto = document.querySelector('.popup_type_photo')
 const closePopupPhoto = document.querySelector('#close-photo')
 
 // функция открытия/закрытия попапа
@@ -124,6 +124,7 @@ closePopupPhoto.addEventListener('click', function (){
 const createCard = (element) => {
   const cardsElement = cardsTemplate.cloneNode(true);
   cardsElement.querySelector('.cards__img').src = element.link;
+  cardsElement.querySelector('.cards__img').alt = element.name;
   cardsElement.querySelector('.cards__text').textContent = element.name;
   return cardsElement;
 }
