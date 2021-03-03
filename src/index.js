@@ -1,4 +1,5 @@
 const openPopup = document.querySelector('#popup-edit');
+const popup = document.querySelectorAll('.popup')
 const editProfile = document.querySelector('.profile__edit-button');
 const closePopup = document.querySelector('#close-edit');
 const editName = document.querySelector('#popup__name');
@@ -11,43 +12,44 @@ const saveEditProfile = document.querySelector('#form-edit');
 const cardsItem = document.querySelector('.cards');
 const cardsTemplate = document.querySelector('#cards-template').content;
 const openPopupAdd = document.querySelector('#popup-add');
-const addPicture = document.querySelector('.profile__add-button');
+const buttonAddPicture = document.querySelector('.profile__add-button');
 const closePopupAdd = document.querySelector('#close-add');
 const pictureName = document.querySelector('#name-add');
 const pictureLink = document.querySelector('#link-add');
 const savePicture = document.querySelector('#form-add');
-
+const like = document.querySelector('.cards__link');
+const cardItem = document.querySelector('.cards__item')
 // попап открытия фото
 const openPhoto = document.querySelector('#popup-photo')
 const closePopupPhoto = document.querySelector('#close-photo')
 
+// функция открытия/закрытия попапа
+const popupToggle = (el) => {
+  el.classList.toggle('popup_status_opened');
+}
 
 // Открыть / закрыть попап редактор профиля
 editProfile.addEventListener('click', function (){
-  openPopup.classList.add('popup_status_opened');
+  popupToggle(openPopup);
   editName.value = profileName.textContent;
   editAbout.value = profileAbout.textContent;
 });
 
 closePopup.addEventListener('click', function (){
-  openPopup.classList.remove('popup_status_opened');
+  popupToggle(openPopup);
 });
-
 
 // Редактировать профиль
 function submitEditProfile(evt){
   evt.preventDefault();
   profileName.textContent = (editName.value);
   profileAbout.textContent = (editAbout.value);
-  openPopup.classList.remove('popup_status_opened');
+  popupToggle(openPopup);
 }
 
 saveEditProfile.addEventListener('submit', submitEditProfile);
 
-
-
-
-const initialCards = [
+let initialCards = [
   {
     name: 'Архыз',
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
@@ -75,73 +77,87 @@ const initialCards = [
 ];
 
 // Открыть / закрыть попап
-addPicture.addEventListener('click', function (){
-  openPopupAdd.classList.add('popup_status_opened');
+buttonAddPicture.addEventListener('click', function (){
+  popupToggle(openPopupAdd)
+  pictureName.value = ''
+  pictureLink.value = ''
 });
 
 closePopupAdd.addEventListener('click', function (){
-  openPopupAdd.classList.remove('popup_status_opened');
+  popupToggle(openPopupAdd)
 });
 
 // Ставим лайки <3
-  const getlike = () => {
-  let like = document.querySelector('.cards__link');
+  const getlike = (el) => {
+  const like = el.querySelector('.cards__link');
   like.addEventListener('click', () => {
     like.classList.toggle('cards__link_status_active');
   });
 }
 
 // Удалить картинку
-  const delPicture = () => {
-  let deletePicture = document.querySelector('.cards__delete');
+  const delPicture = (el) => {
+  const deletePicture = el.querySelector('.cards__delete');
   deletePicture.addEventListener('click', ()=>{
     deletePicture.parentNode.remove();
   });
 }
 
-
 // открыть картинку
-const opPhoto = () => {
-  let card = document.querySelector('.cards__img')
+const openPicture = (el) => {
+  const card = el.querySelector('.cards__img')
     card.addEventListener('click', () => {
         let popupImg = document.querySelector('.popup__img')
+        let popupText = document.querySelector('.popup__photo-text')
         popupImg.src = card.src;
-        openPhoto.classList.add('popup_status_opened');
+        popupText.textContent = card.parentNode.querySelector('.cards__text').textContent;
+        popupToggle(openPhoto);
       })
 }
 
 // Закрыть картинку
 closePopupPhoto.addEventListener('click', function (){
-  openPhoto.classList.remove('popup_status_opened');
+  popupToggle(openPhoto)
 });
 
-
-
-// функция добавление нового элемента в DOM
-const addObject = (element) => {
+// функция создания карты
+const createCard = (element) => {
   const cardsElement = cardsTemplate.cloneNode(true);
   cardsElement.querySelector('.cards__img').src = element.link;
   cardsElement.querySelector('.cards__text').textContent = element.name;
-  cardsItem.prepend(cardsElement);
-  getlike()
-  delPicture()
-  opPhoto();
+  return cardsElement;
 }
 
-initialCards.forEach(addObject);
+// Функция добавления  карты в DOM
+const addСard = (element) => {
+  cardsItem.prepend(element);
+  const readyCard = cardsItem.querySelector('.cards__item');
+  return readyCard;
+}
 
-
-
+// Добавление слушателей
+const addListeners = () => {
+initialCards.forEach((element) => {
+  const createdCard = createCard(element)
+  const card = addСard(createdCard)
+  getlike(card)
+  delPicture(card)
+  openPicture(card)
+});
+}
+addListeners()
 
 // Добавить картинку
 function submitAddPicture(evt){
   evt.preventDefault();
+  initialCards = [];
   let newCard = {};
   newCard.name = pictureName.value;
   newCard.link = pictureLink.value;
-  addObject(newCard);
-  openPopupAdd.classList.remove('popup_status_opened');
+  initialCards.push(newCard)
+  addListeners()
+  console.log(initialCards)
+  popupToggle(openPopupAdd);
 }
 
 savePicture.addEventListener('submit', submitAddPicture);
-
