@@ -1,56 +1,3 @@
-const popupEditProfile = document.querySelector('.popup_type_edit');
-const popup = document.querySelectorAll('.popup')
-const editProfile = document.querySelector('.profile__edit-button');
-const closeEditProfilePopupBtn = document.querySelector('#close-edit');
-const editName = document.querySelector('#popup__name');
-const editAbout = document.querySelector('#popup__about');
-const profileName = document.querySelector('.profile__name');
-const profileAbout = document.querySelector('.profile__status');
-const saveEditProfile = document.querySelector('#form-edit');
-
-// Попап добавления картинок
-const cardsItem = document.querySelector('.cards');
-const cardsTemplate = document.querySelector('#cards-template').content;
-const popupAddCard = document.querySelector('.popup_type_add');
-const buttonAddPicture = document.querySelector('.profile__add-button');
-const closeAddCardPopupBtn = document.querySelector('#close-add');
-const pictureName = document.querySelector('#name-add');
-const pictureLink = document.querySelector('#link-add');
-const savePicture = document.querySelector('#form-add');
-const like = document.querySelector('.cards__link');
-const cardItem = document.querySelector('.cards__item')
-// попап открытия фото
-const popupPhoto = document.querySelector('.popup_type_photo')
-const closePhotoPopupBtn = document.querySelector('#close-photo')
-const popupImg = document.querySelector('.popup__img')
-const popupText = document.querySelector('.popup__photo-text')
-
-// функция открытия/закрытия попапа
-const popupToggle = (el) => {
-  el.classList.toggle('popup_status_opened');
-}
-
-// Открыть / закрыть попап редактор профиля
-editProfile.addEventListener('click', function (){
-  popupToggle(popupEditProfile);
-  editName.value = profileName.textContent;
-  editAbout.value = profileAbout.textContent;
-});
-
-closeEditProfilePopupBtn.addEventListener('click', function (){
-  popupToggle(popupEditProfile);
-});
-
-// Редактировать профиль
-function submitEditProfile(evt){
-  evt.preventDefault();
-  profileName.textContent = (editName.value);
-  profileAbout.textContent = (editAbout.value);
-  popupToggle(popupEditProfile);
-}
-
-saveEditProfile.addEventListener('submit', submitEditProfile);
-
 const initialCards = [
   {
     name: 'Архыз',
@@ -77,23 +24,95 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+const popupEditProfile = document.querySelector('.popup_type_edit');
+const popup = document.querySelectorAll('.popup')
+const editProfile = document.querySelector('.profile__edit-button');
+const closeEditProfilePopupBtn = document.querySelector('#close-edit');
+const editName = document.querySelector('#popup__name');
+const editAbout = document.querySelector('#popup__about');
+const profileName = document.querySelector('.profile__name');
+const profileAbout = document.querySelector('.profile__status');
+const formEditProfile = document.querySelector('#form-edit');
+const editProfileSubmitButton = document.querySelector('.popup__submit_edit')
+const popupCloseButtons = document.querySelectorAll('.popup__close')
+// Попап добавления картинок
+const cardsItem = document.querySelector('.cards');
+const cardsTemplate = document.querySelector('#cards-template').content;
+const popupAddCard = document.querySelector('.popup_type_add');
+const buttonAddPicture = document.querySelector('.profile__add-button');
+const closeAddCardPopupBtn = document.querySelector('#close-add');
+const pictureName = document.querySelector('#popup__name-add');
+const pictureLink = document.querySelector('#popup__link-add');
+const savePicture = document.querySelector('#form-add');
+const like = document.querySelector('.cards__like');
+const cardItem = document.querySelector('.cards__item')
+const popupSubmitAdd = savePicture.querySelector('.popup__submit_add')
+// попап открытия фото
+const popupPhoto = document.querySelector('.popup_type_photo')
+const closePhotoPopupBtn = document.querySelector('#close-photo')
+const popupImg = document.querySelector('.popup__img')
+const popupText = document.querySelector('.popup__photo-text')
+const formInputError = document.querySelector('.form__input-error')
+
+// функция открытия/закрытия попапа
+const openPopup = (el) => {
+  el.classList.add('popup_status_opened');
+  document.addEventListener('keydown', (evt) => {
+    if(evt.key === 'Escape') closePopup(el)
+  })
+}
+
+const closePopup = (el) => {
+  el.classList.remove('popup_status_opened');
+  document.removeEventListener('keydown', (evt) => {
+    if(evt.key === 'Escape') closePopup(el)
+  })
+}
+// закрытие попапа по клику вне попапа
+
+popup.forEach((item) => {
+  item.addEventListener('mousedown', (evt) => {
+    const eventTarget = evt.target;
+    closePopup(eventTarget)
+    evt.stopPropagation();
+  })
+})
+
+// Открыть / закрыть попап редактор профиля
+editProfile.addEventListener('click', function (){
+  openPopup(popupEditProfile);
+  editName.value = profileName.textContent;
+  editAbout.value = profileAbout.textContent;
+});
+
+closeEditProfilePopupBtn.addEventListener('click', function (){
+  closePopup(popupEditProfile);
+});
+
+// Редактировать профиль
+function submitEditProfile(evt){
+  evt.preventDefault();
+  profileName.textContent = (editName.value);
+  profileAbout.textContent = (editAbout.value);
+  closePopup(popupEditProfile);
+}
+
+formEditProfile.addEventListener('submit', submitEditProfile);
 
 // Открыть / закрыть попап
 buttonAddPicture.addEventListener('click', function (){
-  popupToggle(popupAddCard)
-  pictureName.value = ''
-  pictureLink.value = ''
+  openPopup(popupAddCard)
 });
 
 closeAddCardPopupBtn.addEventListener('click', function (){
-  popupToggle(popupAddCard)
+  closePopup(popupAddCard)
 });
 
 // Ставим лайки <3
   const getlike = (el) => {
-  const like = el.querySelector('.cards__link');
+  const like = el.querySelector('.cards__like');
   like.addEventListener('click', () => {
-    like.classList.toggle('cards__link_status_active');
+    like.classList.toggle('cards__like_status_active');
   });
 }
 
@@ -111,13 +130,13 @@ const openPicture = (el) => {
     card.addEventListener('click', () => {
         popupImg.src = card.src;
         popupText.textContent = card.parentNode.querySelector('.cards__text').textContent;
-        popupToggle(popupPhoto);
+        openPopup(popupPhoto);
       })
 }
 
 // Закрыть картинку
 closePhotoPopupBtn.addEventListener('click', function (){
-  popupToggle(popupPhoto)
+  closePopup(popupPhoto)
 });
 
 // функция создания карты
@@ -149,7 +168,8 @@ function submitAddPicture(evt){
   newCard.name = pictureName.value;
   newCard.link = pictureLink.value;
   addСard(createCard(newCard))
-  popupToggle(popupAddCard);
+  closePopup(popupAddCard);
+  savePicture.reset()
+  disablePopupSubmit(popupSubmitAdd)
 }
-
 savePicture.addEventListener('submit', submitAddPicture);

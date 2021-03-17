@@ -1,4 +1,4 @@
-.cards__link{
+.cards__like{
   display: flex;
   align-items: center;
   transition: .5s;
@@ -12,11 +12,11 @@
   background-image: url(../../../images/like.svg);
 }
 
-.cards__link:focus{
+.cards__like:focus{
   outline: none;
 }
 
-.cards__link:hover{
+.cards__like:hover{
   opacity: .5;
 }
 
