@@ -61,18 +61,15 @@ const listenClosePopupClickAround = (evt) => {
   evt.stopPropagation()
 }
 // функция закрытия попапа на Еск
-const closePopopupByEsc = (evt, popup) => {
-  if(evt.key === 'Escape') closePopup(popup)
+const closePopopupByEsc = (evt) => {
+  const openedPopup = document.querySelector('.popup_status_opened');
+  if(evt.key === 'Escape') closePopup(openedPopup)
 }
 // открыть попап
 const openPopup = (popup) => {
   popup.classList.add('popup_status_opened');
-  document.addEventListener('keydown', (evt) => {
-    closePopopupByEsc(evt, popup)
-  })
-  popup.addEventListener('mousedown', (evt) => {
-    listenClosePopupClickAround(evt)
-  })
+  document.addEventListener('keydown',closePopopupByEsc)
+  popup.addEventListener('mousedown',listenClosePopupClickAround)
 }
 // закрыть попап
 const closePopup = (popup) => {
