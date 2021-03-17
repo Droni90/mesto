@@ -77,12 +77,8 @@ const openPopup = (popup) => {
 // закрыть попап
 const closePopup = (popup) => {
   popup.classList.remove('popup_status_opened');
-  document.removeEventListener('keydown', (evt) => {
-    closePopopupByEsc(evt, popup)
-  })
-  popup.removeEventListener('mousedown', (evt) => {
-    listenClosePopupClickAround(evt)
-  })
+  document.removeEventListener('keydown',closePopopupByEsc)
+  popup.removeEventListener('mousedown',listenClosePopupClickAround)
 }
 
 // Открыть / закрыть попап редактор профиля
