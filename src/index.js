@@ -56,9 +56,9 @@ const formInputError = document.querySelector('.form__input-error')
 
 // функция закрытия по клику вокруг попапу
 const listenClosePopupClickAround = (evt) => {
-  eventTarget = evt.target
-  closePopup(eventTarget)
-  evt.stopPropagation()
+  if (evt.target.classList.contains('popup_status_opened')) {
+    closePopup(evt.target);
+  }
 }
 // функция закрытия попапа на Еск
 const closePopopupByEsc = (evt) => {
@@ -68,14 +68,14 @@ const closePopopupByEsc = (evt) => {
 // открыть попап
 const openPopup = (popup) => {
   popup.classList.add('popup_status_opened');
-  document.addEventListener('keydown',closePopopupByEsc)
   popup.addEventListener('mousedown',listenClosePopupClickAround)
+  document.addEventListener('keydown',closePopopupByEsc)
 }
 // закрыть попап
 const closePopup = (popup) => {
   popup.classList.remove('popup_status_opened');
-  document.removeEventListener('keydown',closePopopupByEsc)
   popup.removeEventListener('mousedown',listenClosePopupClickAround)
+  document.removeEventListener('keydown',closePopopupByEsc)
 }
 
 // Открыть / закрыть попап редактор профиля
