@@ -106,6 +106,7 @@ buttonAddPicture.addEventListener('click', function (){
 
 closeAddCardPopupBtn.addEventListener('click', function (){
   closePopup(popupAddCard)
+  savePicture.reset()
 });
 
 // Ставим лайки <3
