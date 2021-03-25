@@ -54,6 +54,13 @@ const popupImg = document.querySelector('.popup__img')
 const popupText = document.querySelector('.popup__photo-text')
 const formInputError = document.querySelector('.form__input-error')
 
+// снятие ошибок при закрытии
+const deleteErrorsAfterClose = (popup) => {
+  errorsSpan = popup.querySelectorAll('.popup__input-error_active')
+  errorsInput = popup.querySelectorAll('.popup__input_type_error')
+  errorsSpan.forEach((evt) => evt.textContent = '')
+  errorsInput.forEach((evt) => evt.classList.remove('popup__input_type_error'))
+}
 // функция закрытия по клику вокруг попапу
 const listenClosePopupClickAround = (evt) => {
   if (evt.target.classList.contains('popup_status_opened')) {
@@ -76,6 +83,8 @@ const closePopup = (popup) => {
   popup.classList.remove('popup_status_opened');
   popup.removeEventListener('mousedown',listenClosePopupClickAround)
   document.removeEventListener('keydown',closePopopupByEsc)
+  deleteErrorsAfterClose(popup)
+  savePicture.reset()
 }
 
 // Открыть / закрыть попап редактор профиля
@@ -106,7 +115,6 @@ buttonAddPicture.addEventListener('click', function (){
 
 closeAddCardPopupBtn.addEventListener('click', function (){
   closePopup(popupAddCard)
-  savePicture.reset()
 });
 
 // Ставим лайки <3
