@@ -45,3 +45,4 @@ export default class Card{
       return this._element
     }
 }
+// С колбэком пока не знаю что делать, попробую разобраться в дальнейшем)
