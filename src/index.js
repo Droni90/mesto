@@ -1,4 +1,5 @@
 import Card from './card.js'
+import FormValidator from "./validate.js";
 const initialCards = [
   {
     name: 'Архыз',
@@ -25,6 +26,16 @@ const initialCards = [
     link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
   }
 ];
+
+const selectorsObject = {
+  formSelector: '.popup__container',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__submit',
+  inactiveButtonClass: 'popup__submit_status_disabled',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+}
+
 const popupEditProfile = document.querySelector('.popup_type_edit');
 const editProfile = document.querySelector('.profile__edit-button');
 const closeEditProfilePopupBtn = document.querySelector('#close-edit');
@@ -41,9 +52,21 @@ const buttonAddPicture = document.querySelector('.profile__add-button');
 const closeAddCardPopupBtn = document.querySelector('#close-add');
 const pictureName = document.querySelector('#popup__name-add');
 const pictureLink = document.querySelector('#popup__link-add');
-const savePicture = document.querySelector('#form-add');
-const popupSubmitAdd = savePicture.querySelector('.popup__submit_add')
+const formPopupAdd = document.querySelector('#form-add');
+const cardsItem = document.querySelector('.cards');
+const popupContainers = document.querySelectorAll('.popup__container')
 
+
+//валидация по формам
+const formList = Array.from(popupContainers);
+formList.forEach((formElement) => {
+  new FormValidator(selectorsObject, formElement).enableValidation()
+});
+
+//начальные карточки
+initialCards.forEach(item => {
+  cardsItem.prepend(new Card(cardsTemplate, item).getCard())
+})
 
 // снятие ошибок при закрытии
 const deleteErrorsAfterClose = (popup) => {
@@ -75,9 +98,9 @@ export const closePopup = (popup) => {
   popup.removeEventListener('mousedown',listenClosePopupClickAround)
   document.removeEventListener('keydown',closePopupByEsc)
   deleteErrorsAfterClose(popup)
-  savePicture.reset()
+  formPopupAdd.reset()
 }
-// Редактировать профиль
+// Сабмит Редактировать профиль
 function submitEditProfile(evt){
   evt.preventDefault();
   profileName.textContent = editName.value;
@@ -85,22 +108,16 @@ function submitEditProfile(evt){
   closePopup(popupEditProfile);
 }
 
-
-
-initialCards.forEach(item => {
-  new Card(cardsTemplate, item).renderCard()
-})
-
 // Добавить картинку
 function submitAddPicture(evt){
   evt.preventDefault();
   const newObj = {};
   newObj.name = pictureName.value;
   newObj.link = pictureLink.value;
-  new Card(cardsTemplate, newObj).renderCard()
+  cardsItem.prepend(new Card(cardsTemplate, newObj).getCard())
   closePopup(popupAddCard);
-  savePicture.reset()
-  disablePopupSubmit(popupSubmitAdd, selectorsObject)
+  formPopupAdd.reset()
+  new FormValidator(selectorsObject, formPopupAdd).enableValidation()
 }
 
 // Открыть / закрыть попап редактор профиля
@@ -119,7 +136,11 @@ buttonAddPicture.addEventListener('click', function (){
 closeAddCardPopupBtn.addEventListener('click', function (){
   closePopup(popupAddCard)
 });
+
 //сабмит редактора профиля
 formEditProfile.addEventListener('submit', submitEditProfile);
+
 //сабмит добавить картинку
-savePicture.addEventListener('submit', submitAddPicture);
+formPopupAdd.addEventListener('submit', submitAddPicture);
+
+
