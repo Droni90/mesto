@@ -6,7 +6,6 @@ const selectorsObject = {
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__input-error_active'
 }
-
 const showInputError = (formElement, inputElement, errorMessage, object) => {
   const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(object.inputErrorClass);
@@ -40,10 +39,12 @@ const hasInvalidInput = (inputList) => {
 // okay
 const enablePopupSubmit = (button, object) => {
   button.classList.remove(object.inactiveButtonClass);
+  button.removeAttribute('disabled', 'disabled');
 }
 
 const disablePopupSubmit = (button, object) => {
   button.classList.add(object.inactiveButtonClass);
+  button.setAttribute('disabled', 'disabled');
 }
 
 const toggleButtonState = (inputList, buttonElement, object) => {
