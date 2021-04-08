@@ -53,4 +53,4 @@ const pictureLink = document.querySelector('#popup__link-add');
 const formPopupAdd = document.querySelector('#form-add');
 const cardsItem = document.querySelector('.cards');
 const popupContainers = document.querySelectorAll('.popup__container')
-const popupFormAddButton = document.querySelector('.popup__submit_add')
+const popupSubmitAddButton = document.querySelector('.popup__submit_add')

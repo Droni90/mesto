@@ -1,24 +1,15 @@
 import Card from './card.js'
 import FormValidator from "./validate.js";
 
-//валидация по формам
-const formList = Array.from(popupContainers);
-formList.forEach((formElement) => {
-  new FormValidator(selectorsObject, formElement).enableValidation()
-});
-
-//начальные карточки
-initialCards.forEach(item => {
-  cardsItem.prepend(new Card(cardsTemplate, item).getCard())
-})
-
-// снятие ошибок при закрытии
-const deleteErrorsAfterClose = (popup) => {
-  const errorsSpan = popup.querySelectorAll('.popup__input-error_active')
-  const errorsInput = popup.querySelectorAll('.popup__input_type_error')
-  errorsSpan.forEach((evt) => evt.textContent = '')
-  errorsInput.forEach((evt) => evt.classList.remove('popup__input_type_error'))
+// открыть попап
+const openPopup = (popup) => {
+  popup.classList.add('popup_status_opened');
+  popup.addEventListener('mousedown',listenClosePopupClickAround)
+  document.addEventListener('keydown',closePopupByEsc)
+  popupSubmitAddButton.classList.add(selectorsObject.inactiveButtonClass);
+  popupSubmitAddButton.setAttribute('disabled', 'disabled');
 }
+
 // функция закрытия по клику вокруг попапу
 const listenClosePopupClickAround = (evt) => {
   if (evt.target.classList.contains('popup_status_opened')) {
@@ -30,21 +21,17 @@ const closePopupByEsc = (evt) => {
   const openedPopup = document.querySelector('.popup_status_opened');
   if(evt.key === 'Escape') closePopup(openedPopup)
 }
-// открыть попап
-export const openPopup = (popup) => {
-  popup.classList.add('popup_status_opened');
-  popup.addEventListener('mousedown',listenClosePopupClickAround)
-  document.addEventListener('keydown',closePopupByEsc)
-}
+
 // закрыть попап
-export const closePopup = (popup) => {
+const closePopup = (popup) => {
   popup.classList.remove('popup_status_opened');
   popup.removeEventListener('mousedown',listenClosePopupClickAround)
   document.removeEventListener('keydown',closePopupByEsc)
   deleteErrorsAfterClose(popup)
   formPopupAdd.reset()
 }
-// Сабмит Редактировать профиль
+
+// Сохранить профиль пользователя
 function submitEditProfile(evt){
   evt.preventDefault();
   profileName.textContent = editName.value;
@@ -58,13 +45,31 @@ function submitAddPicture(evt){
   const newObj = {};
   newObj.name = pictureName.value;
   newObj.link = pictureLink.value;
-  cardsItem.prepend(new Card(cardsTemplate, newObj).getCard())
+  cardsItem.prepend(new Card(cardsTemplate, newObj, openPopup, closePopup).getCard())
   closePopup(popupAddCard);
   formPopupAdd.reset()
-  popupFormAddButton.setAttribute('disabled', 'disabled')
-  popupFormAddButton.classList.add(selectorsObject.inactiveButtonClass);
 }
 
+//начальные карточки
+initialCards.forEach(item => {
+  cardsItem.prepend(new Card(cardsTemplate, item, openPopup, closePopup).getCard())
+})
+
+// снятие ошибок при закрытии
+const deleteErrorsAfterClose = (popup) => {
+  const errorsSpan = popup.querySelectorAll('.popup__input-error_active')
+  const errorsInput = popup.querySelectorAll('.popup__input_type_error')
+  errorsSpan.forEach((el) => el.textContent = '')
+  errorsInput.forEach((el) => el.classList.remove('popup__input_type_error'))
+}
+
+//валидация по формам
+const formList = Array.from(popupContainers);
+formList.forEach((formElement) => {
+  new FormValidator(selectorsObject, formElement).enableValidation()
+});
+
+                            //Слушатели
 // Открыть / закрыть попап редактор профиля
 editProfile.addEventListener('click', function (){
   openPopup(popupEditProfile);

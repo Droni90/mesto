@@ -1,13 +1,14 @@
-import {openPopup, closePopup} from "./index.js";
 const popupPhoto = document.querySelector('.popup_type_photo')
 const closePhotoPopupBtn = document.querySelector('#close-photo')
 const popupImg = document.querySelector('.popup__img')
 const popupText = document.querySelector('.popup__photo-text')
 
 export default class Card{
-  constructor(templateSelector, object){
-    this._templateSelector = templateSelector
+  constructor(templateSelector, object, openPopup, closePopup){
+    this._templateSelector = templateSelector;
     this._object = object;
+    this._openPopup = openPopup;
+    this._closePopup = closePopup;
   }
   _createCard() {
     const cardElement = this._templateSelector
@@ -33,10 +34,10 @@ export default class Card{
       popupImg.src = card.src;
       popupImg.alt = card.alt;
       popupText.textContent = card.parentNode.querySelector('.cards__text').textContent;
-      openPopup(popupPhoto);
+      this._openPopup(popupPhoto);
     })
-    closePhotoPopupBtn.addEventListener('click', function (){
-      closePopup(popupPhoto)
+    closePhotoPopupBtn.addEventListener('click', () => {
+      this._closePopup(popupPhoto)
     });
   }
     getCard(){
@@ -45,4 +46,4 @@ export default class Card{
       return this._element
     }
 }
-// С колбэком пока не знаю что делать, попробую разобраться в дальнейшем)
+
