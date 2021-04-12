@@ -1,14 +1,8 @@
-const popupPhoto = document.querySelector('.popup_type_photo')
-const closePhotoPopupBtn = document.querySelector('#close-photo')
-const popupImg = document.querySelector('.popup__img')
-const popupText = document.querySelector('.popup__photo-text')
-
-export default class Card{
-  constructor(templateSelector, object, openPopup, closePopup){
+export default class Card {
+  constructor(templateSelector, object, handleCardClick){
     this._templateSelector = templateSelector;
     this._object = object;
-    this._openPopup = openPopup;
-    this._closePopup = closePopup;
+    this._handleCardClick = handleCardClick
   }
   _createCard() {
     const cardElement = this._templateSelector
@@ -31,14 +25,10 @@ export default class Card{
     });
     const card = this._element.querySelector('.cards__img')
     card.addEventListener('click', () => {
-      popupImg.src = card.src;
-      popupImg.alt = card.alt;
-      popupText.textContent = card.parentNode.querySelector('.cards__text').textContent;
-      this._openPopup(popupPhoto);
+      this._handleCardClick.open(card);
+      this._handleCardClick.setEventListeners()
     })
-    closePhotoPopupBtn.addEventListener('click', () => {
-      this._closePopup(popupPhoto)
-    });
+
   }
     getCard(){
       this._element = this._createCard();
