@@ -34,7 +34,7 @@ export const selectorsObject = {
   errorClass: 'popup__input-error_active'
 }
 
-export const selectorsUserInfo = {
+export const elementsUserInfo = {
   name: document.querySelector('.profile__name'),
   about: document.querySelector('.profile__status')
 }
@@ -43,8 +43,6 @@ export const popupEditProfile = document.querySelector('.popup_type_edit');
 export const editProfile = document.querySelector('.profile__edit-button');
 export const editName = document.querySelector('#popup__name');
 export const editAbout = document.querySelector('#popup__about');
-export const profileName = document.querySelector('.profile__name');
-export const profileAbout = document.querySelector('.profile__status');
 // Попап добавления картинок
 
 export const cardsTemplate = document.querySelector('#cards-template').content;
@@ -55,6 +53,7 @@ export const pictureLink = document.querySelector('#popup__link-add');
 export const cardsItem = document.querySelector('.cards');
 export const popupContainers = document.querySelectorAll('.popup__container')
 export const popupSubmitAddButton = document.querySelector('.popup__submit_add')
-
 export const popupPhoto = document.querySelector('.popup_type_photo')
+export const formEditProfile = document.querySelector('#form-edit')
+export const formAddProfile = document.querySelector('#form-add')
 

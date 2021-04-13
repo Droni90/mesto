@@ -53,6 +53,12 @@ export default class FormValidator {
       });
     });
   }
+  clearErrors = () => {
+    const errorsSpan = this._formElement.querySelectorAll(`.${this._object.errorClass}`)
+    const errorsInput = this._formElement.querySelectorAll(`.${this._object.inputErrorClass}`)
+    errorsSpan.forEach((el) => el.textContent = '')
+    errorsInput.forEach((el) => el.classList.remove(this._object.inputErrorClass))
+  }
   enableValidation() {
     this._setEventListeners();
   }

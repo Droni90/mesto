@@ -21,7 +21,8 @@ export default class Card {
     });
     const deletePicture = this._element.querySelector('.cards__delete');
     deletePicture.addEventListener('click', ()=>{
-      deletePicture.parentNode.remove();
+      this._element.remove();
+      this._element = null;
     });
     const card = this._element.querySelector('.cards__img')
     card.addEventListener('click', () => {
