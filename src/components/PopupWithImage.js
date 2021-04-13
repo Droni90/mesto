@@ -11,8 +11,4 @@ export default class PopupWithImage extends Popup{
     popupCard.alt = card.alt;
     popupText.textContent = card.parentNode.querySelector('.cards__text').textContent;
   }
-  close = () => {
-    super.close()
-  }
-//  Это не совсем простой вызов, я заменил обычную функцию на Стрелочную, ибо теряется контекст )
 }
