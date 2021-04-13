@@ -1,41 +1,4 @@
 import './pages/index.css';
-// import AddButtonImage from './images/AddButton.svg'
-// import avatarImage from './images/avatar.jpg'
-// import CloseImage from './images/Close.svg'
-// import deleteImage from './images/delete.svg'
-// import EditButtonImage from './images/EditButton.svg'
-// import img1Image from './images/img1.jpg'
-// import img2Image from './images/img2.jpg'
-// import img3Image from './images/img3.jpg'
-// import img4Image from './images/img4.jpg'
-// import img5Image from './images/img5.jpg'
-// import img6Image from './images/img6.jpg'
-// import likeImage from './images/like.svg'
-// import likeBlackImage from './images/like-black.svg'
-// import logoImage from './images/logo.svg'
-// import plusImage from './images/plus.svg'
-//
-// const whoIsTheGoat = [
-//   // меняем исходные пути на переменные
-//   { name: 'AddButtonImage', image: AddButtonImage },
-//   { name: 'avatarImage', link: avatarImage },
-//   { name: 'CloseImage', link: CloseImage },
-//   { name: 'deleteImage', image: deleteImage },
-//   { name: 'EditButtonImage', link: EditButtonImage },
-//   { name: 'img1Image', link: img1Image },
-//   { name: 'img2Image', image: img2Image },
-//   { name: 'img3Image', link: img3Image },
-//   { name: 'img4Image', link: img4Image },
-//   { name: 'img5Image', image: img5Image },
-//   { name: 'img6Image', link: img6Image },
-//   { name: 'likeImage', link: likeImage },
-//   { name: 'likeBlackImage', link: likeBlackImage },
-//   { name: 'logoImage', link: logoImage },
-//   { name: 'plusImage', link: plusImage },
-// ];
-
-
-
 import {selectorsUserInfo, editName,editAbout, initialCards, popupPhoto, popupAddCard, popupEditProfile, cardsItem, cardsTemplate, popupContainers, selectorsObject, editProfile, buttonAddPicture, popupSubmitAddButton, pictureName, pictureLink} from './utils/constants.js';
 import PopupWithForm from "./components/PopupWithForm.js";
 import PopupWithImage from "./components/PopupWithImage.js";
