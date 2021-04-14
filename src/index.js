@@ -1,5 +1,5 @@
 import './pages/index.css';
-import {formEditProfile, formAddProfile, elementsUserInfo, editName,editAbout, initialCards, popupPhoto, popupAddCard, popupEditProfile, cardsItem, cardsTemplate, popupContainers, selectorsObject, editProfile, buttonAddPicture, popupSubmitAddButton, pictureName, pictureLink} from './utils/constants.js';
+import {formEditProfile, formAddProfile, elementsUserInfo, editName,editAbout, initialCards, popupPhoto, popupAddCard, popupEditProfile, cardsItem, cardsTemplate, popupContainers, selectorsObject, editProfile, buttonAddPicture, popupSubmitAddButton} from './utils/constants.js';
 import PopupWithForm from "./components/PopupWithForm.js";
 import PopupWithImage from "./components/PopupWithImage.js";
 import Section from "./components/Section.js";
@@ -12,21 +12,14 @@ const clearErrorsAddForm = new FormValidator(selectorsObject, formAddProfile)
 const userInfo = new UserInfo(elementsUserInfo)
 const popupPhotoClass = new PopupWithImage(popupPhoto)
 
-const popupTypeAdd = new PopupWithForm(popupAddCard, evt => {
-  evt.preventDefault();
-  const newObj = {};
-  newObj.name = pictureName.value;
-  newObj.link = pictureLink.value;
-  const newCard = new Ard(cardsTemplate, newObj, popupPhotoClass).getCard()
+const popupTypeAdd = new PopupWithForm(popupAddCard, inputsValue => {
+  const newCard = new Ard(cardsTemplate, inputsValue, popupPhotoClass).getCard()
   renderCards.addItem(newCard)
   popupTypeAdd.close()
 })
 
-const popupTypeEdit = new PopupWithForm(popupEditProfile, evt => {
-  evt.preventDefault();
-  const {name, about} = elementsUserInfo;
-  name.textContent = editName.value
-  about.textContent = editAbout.value
+const popupTypeEdit = new PopupWithForm(popupEditProfile, inputsValue => {
+  userInfo.setUserInfo(inputsValue)
   popupTypeEdit.close()
 })
 
@@ -47,7 +40,7 @@ formList.forEach((formElement) => {
 });
 //Слушатели
 // Открыть  попап редактор профиля
-editProfile.addEventListener('click', function (){
+editProfile.addEventListener('click', () =>{
   popupTypeEdit.open()
   popupTypeEdit.setEventListeners()
   const {name, about} = userInfo.getUserInfo()
@@ -57,7 +50,7 @@ editProfile.addEventListener('click', function (){
 });
 
 // Открыть  попап добавление картинок
-buttonAddPicture.addEventListener('click', function (){
+buttonAddPicture.addEventListener('click', () =>{
   popupTypeAdd.open()
   popupTypeAdd.setEventListeners()
   popupSubmitAddButton.classList.add(selectorsObject.inactiveButtonClass)

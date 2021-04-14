@@ -9,7 +9,7 @@ export default class UserInfo{
     }
   }
   setUserInfo(newData){
-    this._data.name.textContent = newData.name.value
-    this._data.about.textContent = newData.about.value
+    this._data.name.textContent = newData.name
+    this._data.about.textContent = newData.about
   }
 }
