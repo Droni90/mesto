@@ -9,8 +9,6 @@ import FormValidator from "./components/FormValidator.js";
 import UserInfo from "./components/UserInfo.js";
 import Api from "./components/Api";
 import PopupConfirm from "./components/PopupConfirm";
-import Popup from "./components/Popup";
-import {data} from "autoprefixer";
 const popupConfirm = new PopupConfirm(popupTypeConfirm)
 const clearErrorsEditForm = new FormValidator(selectorsObject, formEditProfile)
 const clearErrorsAddForm = new FormValidator(selectorsObject, formAddProfile)
@@ -28,8 +26,7 @@ const api = new Api({
 // Берем инфу о юзере с Сервера и рендерим на страницу
 api.getUserInfo().then(({name, about, avatar, _id}) => {
   const myId = _id
-  elementsUserInfo.name.textContent = name
-  elementsUserInfo.about.textContent = about
+  userInfo.setUserInfo({name, about})
   elementsUserInfo.avatar.setAttribute('style', `background-image: url("${avatar}")`)
   //Функция создания карточка
   const createNewCard = (element) => {
@@ -102,7 +99,7 @@ api.getUserInfo().then(({name, about, avatar, _id}) => {
         })
         .catch(err => console.log(err))
     })
-
+    // Обнорвляем аватар
     const popupTypeRefresh = new PopupWithForm(popupEditAvatar, inputsValue => {
       const submitText = popupEditAvatar.querySelector('.popup__submit')
       submitText.textContent = 'Сохранение...'
@@ -114,6 +111,7 @@ api.getUserInfo().then(({name, about, avatar, _id}) => {
         })
         .catch(e => console.log(e))
     })
+      //Валидация форм
     const formList = Array.from(popupContainers);
     formList.forEach((formElement) => {
       new FormValidator(selectorsObject, formElement).enableValidation()
@@ -136,7 +134,7 @@ api.getUserInfo().then(({name, about, avatar, _id}) => {
       editAbout.value = about
       clearErrorsEditForm.clearErrors()
     });
-
+    // Кнопка редактирования аватарки
     buttonEditAvatar.addEventListener('click', () => {
       popupTypeRefresh.open()
       popupTypeRefresh.setEventListeners()

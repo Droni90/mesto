@@ -18,7 +18,7 @@ export default class Api {
           : Promise.reject(`Ошибка: ${res.status}`)
         )
   }
-  //
+  //отправка инфо
   patchProfileInfo(inputsValue) {
     const newOptions = {
       ...this._options,
@@ -44,7 +44,7 @@ export default class Api {
         : Promise.reject(`Ошибка: ${res.status}`)
       )
   }
-
+  //Удаляем карту
   removeCard(cardId) {
     const newOptions = {
       ...this._options,
@@ -56,7 +56,7 @@ export default class Api {
         : Promise.reject(`Ошибка: ${res.status}`)
       )
   }
-
+  //Ставим лайк
   putLike(cardId) {
     const newOptions = {
       ...this._options,
@@ -68,7 +68,7 @@ export default class Api {
         : Promise.reject(`Ошибка: ${res.status}`)
       )
   }
-
+  //Удаляем лайк
   removeLike(cardId) {
     const newOptions = {
       ...this._options,
@@ -80,7 +80,7 @@ export default class Api {
         : Promise.reject(`Ошибка: ${res.status}`)
       )
   }
-
+  //Обновляем аватар
   refreshAvatar(inputsValue) {
     const newOptions = {
       ...this._options,
