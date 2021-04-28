@@ -1,20 +1,21 @@
-import './pages/index.css';
+import './index.css';
 import 'regenerator-runtime/runtime'
-import {formEditProfile,formEditAvatar, buttonEditAvatar, popupSubmitEdit, popupEditAvatar, formAddProfile, popupTypeConfirm, elementsUserInfo, editName,editAbout, popupPhoto, popupAddCard, popupEditProfile, cardsItem, cardsTemplate, popupContainers, selectorsObject, editProfile, buttonAddPicture, popupSubmitAddButton} from './utils/constants.js';
-import PopupWithForm from "./components/PopupWithForm.js";
-import PopupWithImage from "./components/PopupWithImage.js";
-import Section from "./components/Section.js";
-import Card from './components/Card.js'
-import FormValidator from "./components/FormValidator.js";
-import UserInfo from "./components/UserInfo.js";
-import Api from "./components/Api";
-import PopupConfirm from "./components/PopupConfirm";
+import {formEditProfile, formEditAvatar, popupImg, popupPhotoText, buttonEditAvatar, popupSubmitEdit, popupEditAvatar, formAddProfile, popupTypeConfirm, elementsUserInfo, editName,editAbout, popupPhoto, popupAddCard, popupEditProfile, cardsItem, cardsTemplate, popupContainers, selectorsObject, editProfile, buttonAddPicture, popupSubmitAddButton} from '../utils/constants.js';
+import PopupWithForm from "../components/PopupWithForm.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import Section from "../components/Section.js";
+import Card from '../components/Card.js'
+import FormValidator from "../components/FormValidator.js";
+import UserInfo from "../components/UserInfo.js";
+import Api from "../components/Api";
+import PopupConfirm from "../components/PopupConfirm";
 const popupConfirm = new PopupConfirm(popupTypeConfirm)
+popupConfirm.setEventListeners()
 const clearErrorsEditForm = new FormValidator(selectorsObject, formEditProfile)
 const clearErrorsAddForm = new FormValidator(selectorsObject, formAddProfile)
 const clearErrorsEditAvatarForm = new FormValidator(selectorsObject, formEditAvatar)
 const userInfo = new UserInfo(elementsUserInfo)
-const popupPhotoClass = new PopupWithImage(popupPhoto)
+const popupPhotoClass = new PopupWithImage(popupPhoto, popupImg, popupPhotoText)
 const renderCards = new Section(cardsItem)
 const api = new Api({
   baseUrl: `https://mesto.nomoreparties.co/v1/cohort-23`,
@@ -43,7 +44,6 @@ api.getUserInfo().then(({name, about, avatar, _id}) => {
             .then(() => newCard.remove())
             .catch(err => console.log(err))
         })
-        popupConfirm.setEventListeners()
       },
       function putLike(cardId){
         api.putLike(cardId)
@@ -67,7 +67,7 @@ api.getUserInfo().then(({name, about, avatar, _id}) => {
   // Берем с сервера Карточки и рендерим на страницу
   api.getInitialCards().then((data) => {
     renderCards.renderItems({
-        items: data,
+        items: data.reverse(),
         renderer: (element) => {
           const newCard = createNewCard(element)
           renderCards.addItem(newCard)
@@ -86,6 +86,7 @@ api.getUserInfo().then(({name, about, avatar, _id}) => {
         })
         .catch(e => console.log(e))
     })
+    popupTypeAdd.setEventListeners()
     // создаем экземпляр редактор профиля
     const popupTypeEdit = new PopupWithForm(popupEditProfile, inputsValue => {
       const submitText = popupEditProfile.querySelector('.popup__submit')
@@ -99,6 +100,7 @@ api.getUserInfo().then(({name, about, avatar, _id}) => {
         })
         .catch(err => console.log(err))
     })
+    popupTypeEdit.setEventListeners()
     // Обнорвляем аватар
     const popupTypeRefresh = new PopupWithForm(popupEditAvatar, inputsValue => {
       const submitText = popupEditAvatar.querySelector('.popup__submit')
@@ -111,24 +113,21 @@ api.getUserInfo().then(({name, about, avatar, _id}) => {
         })
         .catch(e => console.log(e))
     })
-      //Валидация форм
-    const formList = Array.from(popupContainers);
-    formList.forEach((formElement) => {
-      new FormValidator(selectorsObject, formElement).enableValidation()
-    });
+    popupTypeRefresh.setEventListeners()
+    //Валидация форм
+    clearErrorsEditForm.enableValidation()
+    clearErrorsAddForm.enableValidation()
+    clearErrorsEditAvatarForm.enableValidation()
     //слушатели
     // Открыть попап добавления карточки
     buttonAddPicture.addEventListener('click', () =>{
       popupTypeAdd.open()
-      popupTypeAdd.setEventListeners()
-      popupSubmitAddButton.classList.add(selectorsObject.inactiveButtonClass)
-      popupSubmitAddButton.setAttribute('disabled', 'disabled')
+      clearErrorsAddForm.disablePopupSubmit(popupSubmitAddButton)
       clearErrorsAddForm.clearErrors()
     });
     // Открыть  попап редактор профиля
     editProfile.addEventListener('click', () =>{
       popupTypeEdit.open()
-      popupTypeEdit.setEventListeners()
       const {name, about} = userInfo.getUserInfo()
       editName.value = name
       editAbout.value = about
@@ -137,10 +136,9 @@ api.getUserInfo().then(({name, about, avatar, _id}) => {
     // Кнопка редактирования аватарки
     buttonEditAvatar.addEventListener('click', () => {
       popupTypeRefresh.open()
-      popupTypeRefresh.setEventListeners()
-      popupSubmitEdit.classList.add(selectorsObject.inactiveButtonClass)
-      popupSubmitEdit.setAttribute('disabled', 'disabled')
+      clearErrorsEditAvatarForm.disablePopupSubmit(popupSubmitEdit)
       clearErrorsEditAvatarForm.clearErrors()
     })
   })
 })
+// P.S. Я не проигнорировал пару замечаний Можно Лучше. просто Пока не совсем их понял) обязательно с этим разбирусь, спасибо )

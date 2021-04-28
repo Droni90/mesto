@@ -31,13 +31,13 @@ export default class FormValidator {
     button.classList.remove(this._object.inactiveButtonClass);
     button.removeAttribute('disabled', 'disabled');
   }
-  _disablePopupSubmit(button) {
+  disablePopupSubmit(button) {
     button.classList.add(this._object.inactiveButtonClass);
     button.setAttribute('disabled', 'disabled');
   }
   _toggleButtonState(inputList, buttonElement) {
     if (this._hasInvalidInput(inputList)) {
-      this._disablePopupSubmit(buttonElement)
+      this.disablePopupSubmit(buttonElement)
     } else {
       this._enablePopupSubmit(buttonElement)
     }

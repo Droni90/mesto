@@ -10,7 +10,7 @@
 <body class="roof">
   <div class="page">
     <header class="header">
-      <a href="#" target="_self" class="header__link"><img src="<%=require('../images/logo.svg')%>" alt="лого" class="logo"></a>
+      <a href="#" target="_self" class="header__link"><img src="<%=require('./images/logo.svg')%>" alt="лого" class="logo"></a>
     </header>
 
     <main class="main">
@@ -20,14 +20,14 @@
           <div class="profile__flex-row">
             <h1 class="profile__name"></h1>
             <button class="profile__edit-button">
-              <img src="<%=require('../images/EditButton.svg')%>" alt="редкатировать"
+              <img src="<%=require('./images/EditButton.svg')%>" alt="редкатировать"
                    class="profile__edit-button-icon">
             </button>
           </div>
           <p class="profile__status"></p>
         </div>
         <button class="profile__add-button">
-          <img src='<%=require("../images/plus.svg")%>' alt="добавить" class="profile__add-button-icon">
+          <img src='<%=require("./images/plus.svg")%>' alt="добавить" class="profile__add-button-icon">
         </button>
 
       </section>
@@ -43,7 +43,7 @@
 
   <div class="popup popup_type_edit">
     <form id="form-edit" class="popup__container" novalidate>
-      <button type="button" id="close-edit" class="popup__close"><img class="popup__close-icon" src='<%=require("../images/Close.svg")%>' alt="закрыть"></button>
+      <button type="button" id="close-edit" class="popup__close"><img class="popup__close-icon" src='<%=require("./images/Close.svg")%>' alt="закрыть"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <input name="name" type="text" id="popup__name" class="popup__input" value="Жак-Ив Кусто" placeholder="Имя" required minlength="2" maxlength="40">
       <span class="popup__name-error"></span>
@@ -55,7 +55,7 @@
 
   <div class="popup popup_type_add">
     <form id="form-add" class="popup__container" novalidate>
-      <button type="button" id="close-add" class="popup__close"><img class="popup__close-icon" src='<%=require("../images/Close.svg")%>' alt="закрыть"></button>
+      <button type="button" id="close-add" class="popup__close"><img class="popup__close-icon" src='<%=require("./images/Close.svg")%>' alt="закрыть"></button>
       <h2 class="popup__title">Новое место</h2>
       <input name="name" type="text" id="popup__name-add" class="popup__input" placeholder="Название" required minlength="2" maxlength="30">
       <span class="popup__name-add-error"></span>
@@ -68,14 +68,14 @@
   <div class="popup popup_type_photo">
     <div class="popup__photo-container">
       <img src ="#" alt="фото" class="popup__img">
-      <button type="button" id="close-photo" class="popup__close"><img class="popup__close-icon" src='<%=require("../images/Close.svg")%>' alt="закрыть"></button>
+      <button type="button" id="close-photo" class="popup__close"><img class="popup__close-icon" src='<%=require("./images/Close.svg")%>' alt="закрыть"></button>
       <h2 class="popup__photo-text"></h2>
     </div>
   </div>
 
   <div class="popup popup_type_confirm">
     <form id="form-remove" class="popup__container popup__container_size_mini">
-      <button type="button" id="close-remove" class="popup__close"><img class="popup__close-icon" src='<%=require("../images/Close.svg")%>' alt="закрыть"></button>
+      <button type="button" id="close-remove" class="popup__close"><img class="popup__close-icon" src='<%=require("./images/Close.svg")%>' alt="закрыть"></button>
       <h2 class="popup__title">Вы уверены?</h2>
       <button type="submit" class="popup__submit popup__submit_edit">Да</button>
     </form>
@@ -83,11 +83,10 @@
 
   <div class="popup popup_type_refresh">
     <form id="form-refresh" class="popup__container popup__container_size_mini" novalidate>
-      <button type="button" id="close-refresh" class="popup__close"><img class="popup__close-icon" src='<%=require("../images/Close.svg")%>' alt="закрыть"></button>
+      <button type="button" id="close-refresh" class="popup__close"><img class="popup__close-icon" src='<%=require("./images/Close.svg")%>' alt="закрыть"></button>
       <h2 class="popup__title">Обновить аватар</h2>
       <input name="avatar" type="url" id="popup__link-refresh" class="popup__input popup__input_type_refresh" placeholder="Ссылка на аватар" required>
       <span class="popup__link-refresh-error"></span>
-
       <button type="submit" class="popup__submit popup__submit_edit">Сохранить</button>
     </form>
   </div>

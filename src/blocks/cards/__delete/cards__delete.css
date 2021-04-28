@@ -4,7 +4,7 @@
   height: 19px;
   top: 18px;
   right: 15px;
-  background-image: url(../../../../images/delete.svg);
+  background-image: url(../../../images/delete.svg);
   transition: ease .6s;
   border: none;
   font: inherit;

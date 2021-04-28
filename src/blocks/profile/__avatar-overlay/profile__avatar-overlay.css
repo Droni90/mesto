@@ -6,7 +6,7 @@
 
 .profile__avatar-overlay:hover{
   background-color: rgba(0, 0, 0, .8);
-  background-image:  url("../../../../images/avatar-edit.svg");
+  background-image:  url("../../../images/avatar-edit.svg");
   align-items: center;
   justify-content: center;
   background-repeat: no-repeat;

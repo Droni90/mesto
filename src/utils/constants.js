@@ -16,6 +16,7 @@ export const popupEditProfile = document.querySelector('.popup_type_edit');
 export const editProfile = document.querySelector('.profile__edit-button');
 export const editName = document.querySelector('#popup__name');
 export const editAbout = document.querySelector('#popup__about');
+
 // Попап добавления картинок
 export const cardsTemplate = document.querySelector('#cards-template').content;
 export const popupAddCard = document.querySelector('.popup_type_add');
@@ -31,3 +32,5 @@ export const popupTypeConfirm = document.querySelector('.popup_type_confirm')
 export const buttonEditAvatar = document.querySelector('.profile__edit-avatar')
 export const popupEditAvatar = document.querySelector('.popup_type_refresh')
 export const popupSubmitEdit = document.querySelector('.popup__submit_edit')
+export const popupImg = document.querySelector('.popup__img')
+export const popupPhotoText = document.querySelector('.popup__photo-text')
