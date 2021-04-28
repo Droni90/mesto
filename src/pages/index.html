@@ -15,16 +15,16 @@
 
     <main class="main">
       <section class="profile container">
-        <img src='<%=require("../images/avatar.jpg")%>' alt="Аватар" class="profile__avatar">
+        <button type="button" class="profile__edit-avatar"><div class="profile__avatar-overlay"></div></button>
         <div class="profile__info">
           <div class="profile__flex-row">
-            <h1 class="profile__name">Жак-Ив Кусто</h1>
+            <h1 class="profile__name"></h1>
             <button class="profile__edit-button">
               <img src="<%=require('../images/EditButton.svg')%>" alt="редкатировать"
                    class="profile__edit-button-icon">
             </button>
           </div>
-          <p class="profile__status">Исследователь океана</p>
+          <p class="profile__status"></p>
         </div>
         <button class="profile__add-button">
           <img src='<%=require("../images/plus.svg")%>' alt="добавить" class="profile__add-button-icon">
@@ -73,13 +73,35 @@
     </div>
   </div>
 
+  <div class="popup popup_type_confirm">
+    <form id="form-remove" class="popup__container popup__container_size_mini">
+      <button type="button" id="close-remove" class="popup__close"><img class="popup__close-icon" src='<%=require("../images/Close.svg")%>' alt="закрыть"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button type="submit" class="popup__submit popup__submit_edit">Да</button>
+    </form>
+  </div>
+
+  <div class="popup popup_type_refresh">
+    <form id="form-refresh" class="popup__container popup__container_size_mini" novalidate>
+      <button type="button" id="close-refresh" class="popup__close"><img class="popup__close-icon" src='<%=require("../images/Close.svg")%>' alt="закрыть"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <input name="avatar" type="url" id="popup__link-refresh" class="popup__input popup__input_type_refresh" placeholder="Ссылка на аватар" required>
+      <span class="popup__link-refresh-error"></span>
+
+      <button type="submit" class="popup__submit popup__submit_edit">Сохранить</button>
+    </form>
+  </div>
+
   <template id="cards-template">
     <article class="cards__item">
       <img src="#" alt="#" class="cards__img">
       <button type="button" class="cards__delete"></button>
       <div class="cards__info">
         <h2 class="cards__text"></h2>
-        <button class="cards__like"></button>
+        <div class="cards__like-box">
+          <button class="cards__like"></button>
+          <span class="cards__likes-counter"></span>
+        </div>
       </div>
     </article>
   </template>

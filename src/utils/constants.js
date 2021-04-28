@@ -36,7 +36,8 @@ export const selectorsObject = {
 
 export const elementsUserInfo = {
   name: document.querySelector('.profile__name'),
-  about: document.querySelector('.profile__status')
+  about: document.querySelector('.profile__status'),
+  avatar: document.querySelector('.profile__edit-avatar')
 }
 
 export const popupEditProfile = document.querySelector('.popup_type_edit');
@@ -54,4 +55,9 @@ export const popupSubmitAddButton = document.querySelector('.popup__submit_add')
 export const popupPhoto = document.querySelector('.popup_type_photo')
 export const formEditProfile = document.querySelector('#form-edit')
 export const formAddProfile = document.querySelector('#form-add')
+export const formEditAvatar = document.querySelector('#form-refresh')
 
+export const popupTypeConfirm = document.querySelector('.popup_type_confirm')
+export const buttonEditAvatar = document.querySelector('.profile__edit-avatar')
+export const popupEditAvatar = document.querySelector('.popup_type_refresh')
+export const popupSubmitEdit = document.querySelector('.popup__submit_edit')
